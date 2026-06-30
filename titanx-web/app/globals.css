@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --bg-deep: #080808;
+  --bg-surface: #111111;
+  --bg-raised: #1c1c1c;
+  --border: #2e2e2e;
+  --text-primary: #e8e8e8;
+  --text-secondary: #ababab;
+  --silver: #c0c0c0;
+  --accent: #e8732c;
+  --accent-dim: #9e4d1c;
+}
+
+/* ── Tailwind v4 theme mapping ─────────────────────────────── */
+@theme {
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-raised: var(--bg-raised);
+  --color-border-subtle: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-silver: var(--silver);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+
+  --font-barlow: "Barlow Semi Condensed", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+/* ── Base reset ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Responsive type scale ─────────────────────────────────── */
+.h1-display {
+  font-family: var(--font-barlow);
+  font-size: clamp(2.25rem, 5vw + 1rem, 5.5rem);
+  letter-spacing: clamp(0.02em, 0.08em, 0.08em);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.h2-display {
+  font-family: var(--font-barlow);
+  font-size: clamp(1.75rem, 3vw + 1rem, 3.25rem);
+  letter-spacing: clamp(0.02em, 0.06em, 0.06em);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.h3-display {
+  font-family: var(--font-barlow);
+  font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.overline-label {
+  font-family: var(--font-barlow);
+  font-size: clamp(0.6875rem, 0.5vw + 0.5rem, 0.8125rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+}
+
+/* ── Section diagonal cuts ─────────────────────────────────── */
+.section-cut-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vw), 0 100%);
+  padding-bottom: calc(3vw + 5rem);
+}
+
+.section-cut-top {
+  clip-path: polygon(0 3vw, 100% 0, 100% 100%, 0 100%);
+  padding-top: calc(3vw + 5rem);
+  margin-top: calc(-3vw);
+}
+
+@media (min-width: 1280px) {
+  .section-cut-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 38px), 0 100%);
+    padding-bottom: calc(38px + 8rem);
+  }
+  .section-cut-top {
+    clip-path: polygon(0 38px, 100% 0, 100% 100%, 0 100%);
+    padding-top: calc(38px + 8rem);
+    margin-top: -38px;
+  }
+}
+
+/* ── Hero scan-line animation ──────────────────────────────── */
+@keyframes scan-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.scan-line {
+  transform-origin: left;
+  animation: scan-in 0.8s ease-out 0.4s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-line {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* ── Service card hover/focus ──────────────────────────────── */
+.service-card {
+  border-left: 2px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+  border-left-color: var(--accent);
+  box-shadow: 0 0 24px -4px var(--accent);
+  outline: 2px solid transparent;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
